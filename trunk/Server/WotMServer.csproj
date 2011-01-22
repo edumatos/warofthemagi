@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Wizard.cs" />
-    <Compile Include="WotMGame.cs" />
+    <Compile Include="Match.cs" />
+    <Compile Include="WotMLobby.cs" />
   </ItemGroup>
 </Project>

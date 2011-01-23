@@ -1,0 +1,12 @@
+Here be the features planned for each milestone of this project.
+
+=== Milestone 1 Prototype Features ===
+
+  # Neutral enemy unit
+  # At least one tower type
+  # At least one unit building
+
+
+=== Milestone 2 ===
+
+  * to be announced

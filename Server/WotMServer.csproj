@@ -46,10 +46,17 @@
       <HintPath>playerio\Player.IO GameLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\BaseBuilding.cs" />
+    <Compile Include="Data\Spell.cs" />
+    <Compile Include="Data\BaseObject.cs" />
+    <Compile Include="Data\BaseUnit.cs" />
     <Compile Include="Data\Wizard.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="WotMLobby.cs" />

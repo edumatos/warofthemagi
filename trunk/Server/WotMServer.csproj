@@ -53,10 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Area.cs" />
     <Compile Include="Data\BaseBuilding.cs" />
     <Compile Include="Data\Spell.cs" />
     <Compile Include="Data\BaseObject.cs" />
     <Compile Include="Data\BaseUnit.cs" />
+    <Compile Include="Data\Tower.cs" />
+    <Compile Include="Data\Vector2F.cs" />
     <Compile Include="Data\Wizard.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="WotMLobby.cs" />

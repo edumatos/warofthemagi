@@ -9,7 +9,7 @@ namespace WotMServer.Data
     {
         #region Properties
 
-        public int TilePosition { get; set; }
+        public int Cost { get; set; }
 
         #endregion
 

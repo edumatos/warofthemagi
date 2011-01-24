@@ -1,12 +1,21 @@
 ﻿using PlayerIO.GameLibrary;
 using System;
 using WotMServer.Data;
+using System.Collections.Generic;
 
 namespace WotMServer
 {
     [RoomType("WotMLobby")]
     public class WotMLobby : Game<Wizard>
     {
+
+        SortedList<int, string> Names { get; set; }
+
+        public WotMLobby()
+        {
+            Names = new SortedList<int, string>();
+        }
+
         public override void GameStarted()
         {
             Console.WriteLine("Lobby started");
@@ -23,38 +32,42 @@ namespace WotMServer
         {
             Message m = Message.Create("WizardList");
 
-            m.Add(player.Id);
-
-            foreach (Wizard w in Players)
-                m.Add(w.Id);
+            foreach (KeyValuePair<int, string> pair in Names)
+            {
+                m.Add(pair.Key);
+                m.Add(pair.Value);
+            }
 
             player.Send(m);
 
-            Message b = Message.Create("WizardJoined");
-            b.Add(player.Id);
-            Broadcast(b);
-
-            Console.WriteLine("Wizard " + player.Id + " joined the lobby.");
+            Console.WriteLine("Wizard " + player.Id + " has joined the lobby.");
 
             base.UserJoined(player);
         }
 
         public override void UserLeft(Wizard player)
         {
-            Message m = Message.Create("WizardLeft");
-            m.Add(player.Id);
-            Broadcast(m);
-            Console.WriteLine("Wizard " + player.Id + " left the lobby.");
+            Broadcast("WizardLeft", player.Id);
+            Console.WriteLine("Wizard " + Names[player.Id] + " (" + player.Id + ") left the lobby.");
+            Names.Remove(player.Id);
             base.UserLeft(player);
         }
 
         public override void GotMessage(Wizard player, Message message)
         {
-            if (message.Type == "Text")
+            switch (message.Type)
             {
-                Console.WriteLine(player.ConnectUserId + ": " + message.GetString(0));
-                Broadcast("Text", player.ConnectUserId, message.GetString(0));
+                case "WizardText":
+                    Console.WriteLine(Names[player.Id] + ": " + message.GetString(0));
+                    Broadcast("WizardText", player.Id, message.GetString(0));
+                    break;
+                case "WizardJoined":
+                    Names.Add(player.Id, message.GetString(0));
+                    Console.WriteLine("Wizard " + player.Id + " introduced himself as " + Names[player.Id] + ".");
+                    Broadcast("WizardJoined", player.Id, Names[player.Id]);
+                    break;
             }
+                    
             base.GotMessage(player, message);
         }
     }

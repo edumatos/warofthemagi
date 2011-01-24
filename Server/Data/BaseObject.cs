@@ -9,11 +9,17 @@ namespace WotMServer.Data
     {
         #region Properties
 
+        public Wizard Owner { get; set; }
+
         public string Name { get; set; }
+
+        public Vector2F Position { get; set; }
 
         public int Health { get; set; }
 
         public int MaxHealth { get; set; }
+
+        public float Range { get; set; }
 
         #endregion
 
@@ -21,6 +27,9 @@ namespace WotMServer.Data
 
         public abstract void Update(float delta);
 
+        public abstract void GetAttackedBy(BaseObject bo);
+
         #endregion
+
     }
 }

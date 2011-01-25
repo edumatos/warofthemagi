@@ -1,7 +1,7 @@
 package 
 {
 	import org.flixel.FlxGame;
-	import states.MenuState;
+	import states.AuthentiState;
 	[SWF(width = "640", height = "480", backgroundColor = "#000000")]
 	[Frame(factoryClass = "Preloader")]
 	
@@ -13,7 +13,7 @@ package
 	{
 		public function Main():void
 		{
-			super( 640, 480, MenuState, 1 );
+			super( 640, 480, AuthentiState, 1 );
 		}
 	}
 	

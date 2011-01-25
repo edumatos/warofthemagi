@@ -38,6 +38,10 @@ package org.flixel
 		 */
 		static protected var _pause:Boolean;
 		/**
+		 * Can you pause this game or not?
+		 */
+		static public var canPause:Boolean = true;
+		/**
 		 * Whether you are running in Debug or Release mode.
 		 * Set automatically by <code>FlxFactory</code> during startup.
 		 */
@@ -193,19 +197,22 @@ package org.flixel
 		 */
 		static public function set pause(Pause:Boolean):void
 		{
-			var op:Boolean = _pause;
-			_pause = Pause;
-			if(_pause != op)
+			if (canPause)
 			{
-				if(_pause)
+				var op:Boolean = _pause;
+				_pause = Pause;
+				if(_pause != op)
 				{
-					_game.pauseGame();
-					pauseSounds();
-				}
-				else
-				{
-					_game.unpauseGame();
-					playSounds();
+					if(_pause)
+					{
+						_game.pauseGame();
+						pauseSounds();
+					}
+					else
+					{
+						_game.unpauseGame();
+						playSounds();
+					}
 				}
 			}
 		}

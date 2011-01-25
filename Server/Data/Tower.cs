@@ -36,13 +36,13 @@ namespace WotMServer.Data
 
         public new int MaxHealth
         {
-            get { return (int)(base.MaxHealth * MaxHealthBonus); }
+            get { return Convert.ToInt32(base.MaxHealth * MaxHealthBonus); }
             set { base.MaxHealth = value; }
         }
 
         public int Attack
         {
-            get { return (int)(baseAttack * AttackBonus); }
+            get { return Convert.ToInt32(baseAttack * AttackBonus); }
             set { baseAttack = value; }
         }
 
@@ -125,6 +125,48 @@ namespace WotMServer.Data
                 if (Health > MaxHealth)
                     Health = MaxHealth;
             }
+            if (ReadyToFire)
+            {
+                if (TargetObject != null)
+                {
+                    if (TargetObject.Alive)
+                    {
+                        TargetObject.GetAttackedBy(this);
+                        ReadyToFire = false;
+                    }
+                    else
+                        TargetObject = null;
+                }
+            }
+
+            base.Update(delta);
+        }
+
+        public override void GetAttackedBy(BaseObject bob)
+        {
+            if (bob is BaseUnit)
+            {
+                int damage = 0;
+                damage = Math.Min(1, ((BaseUnit)bob).Attack);
+                if (damage > 0)
+                {
+                    Health -= damage;
+                    OnDamaged(new DamagedEventArgs(ID, damage));
+                }
+            }
+        }
+
+        public override void GenerateStateMessage(PlayerIO.GameLibrary.Message gamestate)
+        {
+            gamestate.Add(ID);
+            gamestate.Add(Owner);
+            gamestate.Add(Alive);
+            gamestate.Add(Health);
+            gamestate.Add(MaxHealth);
+            gamestate.Add(Attack);
+            gamestate.Add(ReloadTime);
+            gamestate.Add(Range);
+            gamestate.Add(Regeneration);
         }
 
         #endregion

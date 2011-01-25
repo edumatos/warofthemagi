@@ -22,6 +22,8 @@ namespace WotMServer
 
         public int Wave { get; set; }
 
+        BaseUnit NeutralSpawn { get; set; }
+
         public SortedList<int, Area> Areas { get; set; }
 
         #endregion
@@ -38,6 +40,8 @@ namespace WotMServer
             Wave = 0;
             WaveTime = 120f;
 
+            NeutralSpawn = new BaseUnit();
+
             AddTimer(Update, 20);
             base.GameStarted();
         }
@@ -51,6 +55,7 @@ namespace WotMServer
         {
             int maxplayers;
             Areas.Add(player.Id, new Area(player));
+            Areas[player.Id].UnitTrained += new TrainedEventHandler(Match_UnitTrained);
             player.ViewPlayerId = player.Id;
             //Parse roomdata
             if (!int.TryParse(RoomData["maxplayers"], out maxplayers))
@@ -60,10 +65,35 @@ namespace WotMServer
             base.UserJoined(player);
         }
 
+        void Match_UnitTrained(object sender, EventArgs e)
+        {
+            // make a base unit to attack in all enemy areas
+            foreach (KeyValuePair<int, Area> a in Areas)
+            {
+                if (a.Value != (Area)sender)
+                {
+                    BaseUnit unit = new BaseUnit();
+                    unit.Owner = ((Area)sender).Owner;
+                    unit.TargetLocation = new Vector2F(.5f * Area.Size.X, Area.Size.Y);
+                    unit.Damaged += new DamagedEventHandler(Match_ObjectDamaged);
+                    a.Value.Units.Add(unit);
+                }
+            }
+        }
+
+        void Match_ObjectDamaged(object sender, DamagedEventArgs e)
+        {
+            Broadcast("Damage", e.ID, e.Damage);
+        }
+
         public override void UserLeft(Wizard player)
         {
             // remove the area belonging to this player
             Areas.Remove(player.Id);
+
+            // set all units belonging to this player to neutral
+            foreach (KeyValuePair<int, Area> a in Areas)
+                a.Value.RemovePlayerUnits(player);
 
             base.UserLeft(player);
         }
@@ -107,6 +137,9 @@ namespace WotMServer
                     Areas.Remove(player.Id);
                     CheckForWinner();
                     break;
+                case "Build":
+                    Areas[player.Id].AttemptBuild(message);
+                    break;
             }
             base.GotMessage(player, message);
         }
@@ -137,10 +170,7 @@ namespace WotMServer
                         if (w.Ready == false)
                             allready = false;
                     if (allready)
-                    {
-                        GameRunning = true;
                         GotoNextWave();
-                    }
                 }
                 if (WaveTime <= 0)
                 {
@@ -171,26 +201,41 @@ namespace WotMServer
                 {
                     GameStateTimer -= .1f;
                     //TODO: compile data for gamestate
-                    //foreach (Wizard w in Players)
-                    //{
-                    //    Message gamestate = Message.Create("State");
-
-                    //    w.Send(gamestate);
-                    //}
+                    foreach (Wizard w in Players)
+                    {
+                        Message gamestate = Message.Create("State");
+                        Areas[w.ViewPlayerId].GenerateStateMessage(gamestate);
+                        w.Send(gamestate);
+                    }
                 }
             }
         }
 
         private void SpawnNeutrals()
         {
-            //TODO: spawn neutrals
+            //spawn neutrals
+            foreach (KeyValuePair<int, Area> a in Areas)
+            {
+                Random rand = new Random();
+                BaseUnit neutral = NeutralSpawn.MakeCopy();
+                neutral.Position = new Vector2F(Convert.ToSingle(rand.NextDouble()) * Area.Size.X, 0);
+                neutral.TargetLocation = new Vector2F(.5f * Area.Size.X, Area.Size.Y - 1);
+                neutral.Orders = BaseUnit.Actions.ATTACK;
+                a.Value.Neutrals.Add(neutral);
+                neutral.Damaged += new DamagedEventHandler(Match_ObjectDamaged);
+            }
         }
 
         void GotoNextWave()
         {
             Wave++;
             WaveTime = 30f;
-            //TODO: setup some params for neutral units for this wave
+            //setup some params for neutral units for this wave
+            NeutralSpawn.Attack = Wave;
+            NeutralSpawn.Health = NeutralSpawn.MaxHealth = 8 + (Wave << 1);
+            NeutralSpawn.Defense = Wave;
+            NeutralSpawn.Speed = 50f + Wave;
+            NeutralSpawn.Reward = Wave;
         }
 
     }

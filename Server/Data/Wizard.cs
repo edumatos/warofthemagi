@@ -22,6 +22,10 @@ namespace WotMServer.Data
 
         public string Name { get; set; }
 
+        public int Win { get; set; }
+
+        public int Loss { get; set; }
+
         public int ViewPlayerId { get; set; }
 
         public int Mana { get; set; }

@@ -1,8 +1,10 @@
 package states 
 {
 	import org.flixel.*;
+	import playerio.*;
 	import states.MenuState;
 	import ui.Input;
+	import game.GameInfo;
 	
 	/**
 	 * ...
@@ -13,6 +15,8 @@ package states
 		private var usrname:Input;
 		private var passwrd:Input;
 		private var btnConnect:FlxButton;
+		private var btnRegister:FlxButton;
+		private var errorText:FlxText;
 		[Embed(source = '../images/cursor.png')] private var imgCursor:Class;
 		
 		public function AuthentiState() 
@@ -43,11 +47,15 @@ package states
 			passwrd.textColor = 0xffffffff;
 			passwrd.borderColor = 0xffffffff;
 			addChild(passwrd);
+			errorText = new FlxText(100, 100, 500);
+			add(errorText);
 			
-			
-			btnConnect = new FlxButton(320, 300, connectClicked);
+			btnConnect = new FlxButton(320, 200, connectClicked);
 			btnConnect.loadText(new FlxText(25, 3, 50, "CONNECT"));
 			add(btnConnect);
+			btnRegister = new FlxButton(200, 200, registerClicked);
+			btnRegister.loadText(new FlxText(25, 3, 50, "REGISTER"));
+			add(btnRegister);
 			
 			FlxG.mouse.show(imgCursor);
 
@@ -64,11 +72,32 @@ package states
 			FlxG.state = new MenuState;
 		}
 		
-		public function connectClicked():void
+		private function connectClicked():void
 		{
-			removeChild(usrname);
-			removeChild(passwrd);
+			PlayerIO.quickConnect.simpleConnect(FlxG.stage, "war-of-the-magi-c02pduuwjkw1333jpfm6wq", 
+				usrname.text, passwrd.text, connectSuccess, simpleUsersFailure);
+		}
+		
+		private function registerClicked():void
+		{
+			PlayerIO.quickConnect.simpleRegister(FlxG.stage, "war-of-the-magi-c02pduuwjkw1333jpfm6wq",
+				usrname.text, passwrd.text, null, "", "", null, connectSuccess, simpleUsersFailure);
+		}
+		
+		private function connectSuccess(client:Client):void
+		{
+			GameInfo.username = usrname.text;
+			GameInfo.password = passwrd.text;
 			FlxG.fade.start(0x000000, 1, onFade);
+		}
+		
+		private function simpleUsersFailure(error:PlayerIOError):void
+		{
+			usrname.text = "";
+			usrname.width = 125;
+			passwrd.text = "";
+			passwrd.width = 125;
+			errorText.text = error.message;
 		}
 		
 	}

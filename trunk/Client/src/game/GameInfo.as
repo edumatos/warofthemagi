@@ -18,6 +18,10 @@ package  game
 		
 		public static var password:String;
 		
+		public static var client:Client;
+		
+		public static var connection:Connection;
+		
 		//TODO: add anything else needed for game operations
 		
 		

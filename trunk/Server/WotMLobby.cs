@@ -45,7 +45,7 @@ namespace WotMServer
                 player.Send(m);
             }
 
-            Console.WriteLine("Wizard " + player.Id + " has joined the lobby.");
+            Console.WriteLine("Wizard (" + player.Id + ") has joined the lobby.");
 
             base.UserJoined(player);
         }
@@ -68,7 +68,7 @@ namespace WotMServer
                     break;
                 case "WizardJoined":
                     Names.Add(player.Id, message.GetString(0));
-                    Console.WriteLine("Wizard " + player.Id + " introduced himself as " + Names[player.Id] + ".");
+                    Console.WriteLine("Wizard (" + player.Id + ") introduced himself as " + Names[player.Id] + ".");
                     Broadcast("WizardJoined", player.Id, Names[player.Id]);
                     break;
             }

@@ -51,7 +51,7 @@ namespace WotMServer.Data
         public BaseUnit()
             : base()
         {
-            TargetLocation = Vector2F.Invalid;
+            TargetLocation = Vector2F.Invalid();
             AttackSpeed = 1f;
             AttackTimer = 1f;
             Speed = 50f;
@@ -66,9 +66,7 @@ namespace WotMServer.Data
 
         public BaseUnit MakeCopy()
         {
-            BaseUnit copy = (BaseUnit)this.MemberwiseClone();
-            copy.ID = GenerateUniqueID();
-            return copy;
+            return (BaseUnit)this.MemberwiseClone();
         }
 
         public override void Update(float delta)
@@ -104,7 +102,7 @@ namespace WotMServer.Data
                         }
                         else
                         {
-                            Velocity = Vector2F.Empty;
+                            Velocity = Vector2F.Empty();
                             TargetObject = null;
                         }
 
@@ -135,7 +133,7 @@ namespace WotMServer.Data
                         }
                         else
                         {
-                            Velocity = Vector2F.Empty;
+                            Velocity = Vector2F.Empty();
                             TargetObject = null;
                         }
                     }
@@ -151,8 +149,8 @@ namespace WotMServer.Data
                         else
                         {
                             Orders = Actions.STOP;
-                            Velocity = Vector2F.Empty;
-                            TargetLocation = Vector2F.Invalid;
+                            Velocity = Vector2F.Empty();
+                            TargetLocation = Vector2F.Invalid();
                         }
                     }
                     break;
@@ -178,13 +176,12 @@ namespace WotMServer.Data
             if (damage > 0)
             {
                 Health -= damage;
-                OnDamaged(new DamagedEventArgs(ID, damage));
+                OnDamaged(new DamagedEventArgs(Position, damage));
             }
         }
 
         public override void GenerateStateMessage(PlayerIO.GameLibrary.Message gamestate)
         {
-            gamestate.Add(ID);
             gamestate.Add(Owner);
             gamestate.Add(Alive);
             gamestate.Add(Position.X);

@@ -20,7 +20,8 @@ package states
 		private var btnLogOut:FlxButton;
 		private var chatLabel:FlxText;
 		private var userList:Label;
-		private var chatLog:Label;
+		private var chatLog:Array;
+		private var chatLogText:Label;
 		private var chatBox:Input;
 		private var namesCount:int;
 		private var names:Dictionary;
@@ -31,7 +32,8 @@ package states
 
 		override public function create():void
 		{
-			GameInfo.client.multiplayer.joinRoom("WotMLobby", GameInfo.username, registerSelf, joinError);
+			//GameInfo.client.multiplayer.developmentServer = "localhost:8184";
+			GameInfo.client.multiplayer.createJoinRoom("public", "WotMLobby", false, null, null, registerSelf, joinError);
 			names = new Dictionary();
 			namesCount = 0;
 			userList = new Label("");
@@ -50,20 +52,21 @@ package states
 			chatBox.backgroundColor = 0;
 			chatBox.textColor = 0xffffffff;
 			chatBox.borderColor = 0xffffffff;
-			chatBox.x = chatLabel.right + 5;
+			chatBox.x = chatLabel.right;
 			chatBox.y = FlxG.height - 25;
 			chatBox.height = 20;
-			chatBox.width = FlxG.width - 110;
+			chatBox.width = FlxG.width - 110 - 200;
 			addChild(chatBox);
-			chatLog = new Label("");
-			chatLog.backgroundColor = 0;
-			chatLog.textColor = 0xffffffff;
-			chatLog.borderColor = 0xffffffff;
-			chatLog.x = chatLabel.x;
-			chatLog.y = 5;
-			chatLog.width = userList.x - chatLog.x - 5;
-			chatLog.height = userList.height;
-			addChild(chatLog);
+			chatLog = new Array();
+			chatLogText = new Label("");
+			chatLogText.backgroundColor = 0;
+			chatLogText.textColor = 0xffffffff;
+			chatLogText.borderColor = 0xffffffff;
+			chatLogText.x = chatLabel.x;
+			chatLogText.y = 5;
+			chatLogText.width = userList.x - chatLogText.x - 5;
+			chatLogText.height = userList.height;
+			addChild(chatLogText);
 		}
 		
 		override public function update():void
@@ -71,9 +74,30 @@ package states
 			if ( FlxG.keys.pressed("ENTER") )
 			{
 				// send chat message
+				if (chatBox.text != "")
+				{
+					GameInfo.connection.send("WizardText", chatBox.text);
+					chatBox.text = "";
+					chatBox.width = FlxG.width - 110 - 200;
+				}
 				//FlxG.fade.start(0xee000000, .5, onFade);
 			}
 			super.update();
+		}
+		
+		private function buildWizardList():void
+		{
+			userList.text = "";
+			var i:int = 0;
+			for (var id:String in names)
+			{
+				i++;
+				if (i > namesCount) break;
+				userList.text = userList.text + names[id] + "\n";
+			}
+			//userList.text += "---\n";
+			userList.width = 125;
+			userList.height = FlxG.height - 30;
 		}
 		
 		private function onFade():void
@@ -96,22 +120,36 @@ package states
 		
 		private function wizardJoined(m:Message, id:int, name:String):void
 		{
-			if (names[id.toString()] == undefined) namesCount++;
-			names[id.toString()] = name;
+			if (names[id] == undefined)
+			{
+				namesCount++;
+			}
+			names[id] = name;
+			
+			buildWizardList();
 		}
 		
 		private function wizardText(m:Message, id:int, message:String):void
 		{
 			//todo: add message to message log;
+			chatLog.push(names[id] + ": " + message);
+			if (chatLog.length > 29) chatLog.shift();
+			chatLogText.text = "";
+			for (var i:int = 0; i < chatLog.length; ++i )
+				chatLogText.text += chatLog[i] + "\n";
+			//chatLogText.text += "---\n";
+			chatLogText.width = FlxG.width - 335;
+			chatLogText.height = FlxG.height - 30;
 		}
 		
 		private function wizardLeft(m:Message, id:int):void
 		{
 			// remove the wizard from the list
-			if (names[id.toString()] == undefined) return;
-			delete names[id.toString()];
+			if (names[id] == undefined) return;
+			delete names[id];
 			namesCount--;
 			//todo: rebuild userlist text
+			buildWizardList();
 		}
 		
 		private function wizardList(m:Message):void
@@ -119,16 +157,18 @@ package states
 			var count:int = m.getInt(0);
 			for (var i:int = 0; i < count; ++i)
 			{
-				var go:GameObject = new GameObject();
-				go.id = m.getInt(i * 2 + 1);
-				go.name = m.getString(i * 2 + 2);
-				names.push(go);
+				var id:int = m.getInt(i * 2 + 1);
+				if (names[id] == undefined) namesCount++;
+				names[id] = m.getString(i * 2 + 2);
 			}
+			buildWizardList();
 		}
 		
 		private function joinError(error:PlayerIOError):void
 		{
 			//todo: error stuffs
+			trace(error.name + error.message);
+			//GameInfo.connection.disconnect();
 			logout();
 		}
 		

@@ -8,7 +8,9 @@ package game
 	 */
 	public class GameObject 
 	{
-		public var Id:int;
+		public var id:int;
+		
+		public var name:String;
 		
 		public var rect:FlxRect;
 		
@@ -20,7 +22,7 @@ package game
 		{
 			//
 		}
-		
+				
 	}
 
 }

@@ -30,15 +30,20 @@ namespace WotMServer
 
         public override void UserJoined(Wizard player)
         {
-            Message m = Message.Create("WizardList");
-
-            foreach (KeyValuePair<int, string> pair in Names)
+            if (Names.Count > 0)
             {
-                m.Add(pair.Key);
-                m.Add(pair.Value);
-            }
+                Message m = Message.Create("WizardList");
 
-            player.Send(m);
+                m.Add(Names.Count);
+
+                foreach (KeyValuePair<int, string> pair in Names)
+                {
+                    m.Add(pair.Key);
+                    m.Add(pair.Value);
+                }
+
+                player.Send(m);
+            }
 
             Console.WriteLine("Wizard " + player.Id + " has joined the lobby.");
 

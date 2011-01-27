@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WotMServer", "WotMServer.csproj", "{E80DC90D-2B30-4B1D-ADF7-3EE054641220}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugServer", "DebugServer.csproj", "{DBE72177-131B-4037-8035-DB1649F44D67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{E80DC90D-2B30-4B1D-ADF7-3EE054641220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E80DC90D-2B30-4B1D-ADF7-3EE054641220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E80DC90D-2B30-4B1D-ADF7-3EE054641220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBE72177-131B-4037-8035-DB1649F44D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBE72177-131B-4037-8035-DB1649F44D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBE72177-131B-4037-8035-DB1649F44D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBE72177-131B-4037-8035-DB1649F44D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

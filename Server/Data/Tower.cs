@@ -151,16 +151,17 @@ namespace WotMServer.Data
                 if (damage > 0)
                 {
                     Health -= damage;
-                    OnDamaged(new DamagedEventArgs(ID, damage));
+                    OnDamaged(new DamagedEventArgs(bob.Position, damage));
                 }
             }
         }
 
         public override void GenerateStateMessage(PlayerIO.GameLibrary.Message gamestate)
         {
-            gamestate.Add(ID);
             gamestate.Add(Owner);
             gamestate.Add(Alive);
+            gamestate.Add(Position.X);
+            gamestate.Add(Position.Y);
             gamestate.Add(Health);
             gamestate.Add(MaxHealth);
             gamestate.Add(Attack);

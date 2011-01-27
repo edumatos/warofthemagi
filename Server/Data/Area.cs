@@ -10,7 +10,9 @@ namespace WotMServer.Data
     {
         public event TrainedEventHandler UnitTrained;
 
-        public static readonly Vector2F Size = new Vector2F(384, 480);
+        public const float Width = 384f;
+
+        public const float Height = 480f;
 
         public enum BuildingTypes
         {
@@ -202,14 +204,14 @@ namespace WotMServer.Data
 
         internal void AttemptBuild(PlayerIO.GameLibrary.Message message)
         {
-            Vector2F location = Vector2F.Empty;
+            Vector2F location = Vector2F.Empty();
             Message m;
             switch (message.GetInt(0))
             {
                 case (int)BuildingTypes.TOWER:
                     location = new Vector2F(message.GetFloat(1), message.GetFloat(2));
-                    if (location.Y < 120f || location.Y + Tower.DefaultSize.Y >= Size.Y ||
-                        location.X < 0 || location.X + Tower.DefaultSize.X >= Size.X ||
+                    if (location.Y < 120f || location.Y + Tower.DefaultSize >= Height ||
+                        location.X < 0 || location.X + Tower.DefaultSize >= Width ||
                         Owner.Mana < 50)
                     {
                         Owner.Send("Build", false);
@@ -217,7 +219,7 @@ namespace WotMServer.Data
                     }
                     foreach (BaseBuilding b in Buildings)
                     {
-                        if (b.Intersects(location, Tower.DefaultSize))
+                        if (b.Intersects(location, new Vector2F(Tower.DefaultSize, Tower.DefaultSize)))
                         {
                             Owner.Send("Build", false);
                             return;
@@ -229,13 +231,13 @@ namespace WotMServer.Data
                     Owner.Mana -= newTower.Cost;
                     m = Message.Create("Build", true, newTower.Cost, Owner.Mana);
                     newTower.GenerateStateMessage(m);
-                    m.Add(Tower.DefaultSize.X, Tower.DefaultSize.Y);
+                    m.Add(Tower.DefaultSize, Tower.DefaultSize);
                     Owner.Send(m);
                     break;
                 case (int)BuildingTypes.BARRACKS:
                     location = new Vector2F(message.GetFloat(1), message.GetFloat(2));
-                    if (location.Y < 120f || location.Y + Barracks.DefaultSize.Y >= Size.Y ||
-                        location.X < 0 || location.X + Barracks.DefaultSize.X >= Size.X ||
+                    if (location.Y < 120f || location.Y + Barracks.DefaultSize >= Height ||
+                        location.X < 0 || location.X + Barracks.DefaultSize >= Width ||
                         Owner.Mana < 50)
                     {
                         Owner.Send("Build", false);
@@ -243,7 +245,7 @@ namespace WotMServer.Data
                     }
                     foreach (BaseBuilding b in Buildings)
                     {
-                        if (b.Intersects(location, Barracks.DefaultSize))
+                        if (b.Intersects(location, new Vector2F(Barracks.DefaultSize, Barracks.DefaultSize)))
                         {
                             Owner.Send("Build", false);
                             return;
@@ -255,7 +257,7 @@ namespace WotMServer.Data
                     Owner.Mana -= newBarracks.Cost;
                     m = Message.Create("Build", true, newBarracks.Cost, Owner.Mana);
                     newBarracks.GenerateStateMessage(m);
-                    m.Add(Barracks.DefaultSize.X, Barracks.DefaultSize.Y);
+                    m.Add(Barracks.DefaultSize, Barracks.DefaultSize);
                     Owner.Send(m);
                     newBarracks.Trained += new TrainedEventHandler(newBarracks_Trained);
                     break;

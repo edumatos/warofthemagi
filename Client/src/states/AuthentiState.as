@@ -68,6 +68,10 @@ package states
 		
 		override public function update():void 
 		{
+			if (FlxG.keys.pressed("ENTER"))
+			{
+				connectClicked();
+			}
 			super.update();
 		}
 		

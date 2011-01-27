@@ -11,13 +11,9 @@ namespace WotMServer.Data
     {
         public event DamagedEventHandler Damaged;
 
-        public static readonly float VisibleRange = 100f;
-
-        static int counter = 0;
+        public const float VisibleRange = 100f;
 
         #region Properties
-
-        public int ID { get; set; }
 
         public Wizard Owner { get; set; }
 
@@ -41,7 +37,6 @@ namespace WotMServer.Data
 
         public BaseObject()
         {
-            ID = GenerateUniqueID();
             Alive = true;
         }
 
@@ -56,11 +51,6 @@ namespace WotMServer.Data
         #endregion
 
         #region Methods
-
-        public static int GenerateUniqueID()
-        {
-            return counter++;
-        }
 
         public virtual void Update(float delta)
         {

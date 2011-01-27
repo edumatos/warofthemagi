@@ -74,7 +74,7 @@ namespace WotMServer
                 {
                     BaseUnit unit = new BaseUnit();
                     unit.Owner = ((Area)sender).Owner;
-                    unit.TargetLocation = new Vector2F(.5f * Area.Size.X, Area.Size.Y);
+                    unit.TargetLocation = new Vector2F(.5f * Area.Width, Area.Height);
                     unit.Damaged += new DamagedEventHandler(Match_ObjectDamaged);
                     a.Value.Units.Add(unit);
                 }
@@ -83,7 +83,7 @@ namespace WotMServer
 
         void Match_ObjectDamaged(object sender, DamagedEventArgs e)
         {
-            Broadcast("Damage", e.ID, e.Damage);
+            Broadcast("Damage", e.Position.X, e.Position.Y, e.Damage);
         }
 
         public override void UserLeft(Wizard player)
@@ -218,8 +218,8 @@ namespace WotMServer
             {
                 Random rand = new Random();
                 BaseUnit neutral = NeutralSpawn.MakeCopy();
-                neutral.Position = new Vector2F(Convert.ToSingle(rand.NextDouble()) * Area.Size.X, 0);
-                neutral.TargetLocation = new Vector2F(.5f * Area.Size.X, Area.Size.Y - 1);
+                neutral.Position = new Vector2F(Convert.ToSingle(rand.NextDouble()) * Area.Width, 0);
+                neutral.TargetLocation = new Vector2F(.5f * Area.Width, Area.Height - 1);
                 neutral.Orders = BaseUnit.Actions.ATTACK;
                 a.Value.Neutrals.Add(neutral);
                 neutral.Damaged += new DamagedEventHandler(Match_ObjectDamaged);

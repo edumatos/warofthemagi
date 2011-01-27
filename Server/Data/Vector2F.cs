@@ -8,8 +8,8 @@ namespace WotMServer.Data
     [Serializable]
     public struct Vector2F
     {
-        public static readonly Vector2F Empty;
-        public static readonly Vector2F Invalid = new Vector2F(-1, -1);
+        public static Vector2F Empty() { return new Vector2F(); }
+        public static Vector2F Invalid() { return new Vector2F(-1, -1); }
 
         public float X { get; set; }
 
@@ -100,7 +100,7 @@ namespace WotMServer.Data
 
         public bool isValid()
         {
-            return X >= 0 && X < Area.Size.X && Y >= 0 && Y < Area.Size.Y;
+            return X >= 0 && X < Area.Width && Y >= 0 && Y < Area.Height;
         }
     }
 }

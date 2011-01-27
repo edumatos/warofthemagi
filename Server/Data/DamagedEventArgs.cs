@@ -9,7 +9,7 @@ namespace WotMServer.Data
     {
         #region Properties
 
-        public int ID { get; set; }
+        public Vector2F Position { get; set; }
 
         public int Damage { get; set; }
 
@@ -17,9 +17,9 @@ namespace WotMServer.Data
 
         #region Constructors
 
-        public DamagedEventArgs(int id, int damage)
+        public DamagedEventArgs(Vector2F position, int damage)
         {
-            ID = id;
+            Position = position;
             Damage = damage;
         }
 

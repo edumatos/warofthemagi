@@ -7,7 +7,7 @@ namespace WotMServer.Data
 {
     public class BaseBuilding : BaseObject
     {
-        public static readonly Vector2F DefaultSize = new Vector2F(32, 32);
+        public const float DefaultSize = 32f;
 
         #region Properties
 
@@ -25,16 +25,26 @@ namespace WotMServer.Data
 
         public override void GenerateStateMessage(PlayerIO.GameLibrary.Message gamestate)
         {
-            gamestate.Add(ID);
             gamestate.Add(Owner);
             gamestate.Add(Alive);
+            gamestate.Add(Position.X);
+            gamestate.Add(Position.Y);
             gamestate.Add(Health);
             gamestate.Add(MaxHealth);
         }
 
         public override void GetAttackedBy(BaseObject bob)
         {
-            //throw new NotImplementedException();
+            if (bob is BaseUnit)
+            {
+                int damage = 0;
+                damage = Math.Min(1, ((BaseUnit)bob).Attack);
+                if (damage > 0)
+                {
+                    Health -= damage;
+                    OnDamaged(new DamagedEventArgs(Position, damage));
+                }
+            }
         }
 
         #endregion

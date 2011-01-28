@@ -88,7 +88,7 @@ package org.flixel
 		 */
 		public function FlxGame(GameSizeX:uint,GameSizeY:uint,InitialState:Class,Zoom:uint=2)
 		{
-			flash.ui.Mouse.hide();
+			//flash.ui.Mouse.hide();
 			
 			_zoom = Zoom;
 			FlxState.bgColor = 0xff000000;

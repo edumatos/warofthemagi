@@ -1,13 +1,15 @@
 package states
 {
+	import flash.events.Event;
+	import flash.ui.Mouse;
 	import flash.utils.Dictionary;
 	import game.GameObject;
 	import org.flixel.*;
 	import playerio.*;
 	import states.PlayState;
-	import ui.Input;
-	import ui.Label;
 	import game.GameInfo;
+	import ui.ChatPanel;
+	import ui.ErrorBox;
 
 	/**
 	 * ...
@@ -16,15 +18,10 @@ package states
 	public class MenuState extends FlxState
 	{
 		private var playGame:Boolean;
-		private var btnJoinGame:FlxButton;
-		private var btnLogOut:FlxButton;
-		private var chatLabel:FlxText;
-		private var userList:Label;
-		private var chatLog:Array;
-		private var chatLogText:Label;
-		private var chatBox:Input;
 		private var namesCount:int;
 		private var names:Dictionary;
+		private var chat:ChatPanel;
+		private var errorBox:ErrorBox;
 		
 		public function MenuState():void
 		{
@@ -36,37 +33,10 @@ package states
 			GameInfo.client.multiplayer.createJoinRoom("public", "WotMLobby", false, null, null, registerSelf, joinError);
 			names = new Dictionary();
 			namesCount = 0;
-			userList = new Label("");
-			userList.backgroundColor = 0;
-			userList.textColor = 0xffffffff;
-			userList.borderColor = 0xffffffff;
-			userList.x = FlxG.width - 130;
-			userList.y = 5;
-			userList.width = 125;
-			userList.height = FlxG.height - 30;
-			addChild(userList);
-			chatLabel = new FlxText(200, FlxG.height - 22, 50, "Chat:");
-			chatLabel.setFormat(null, 10);
-			add(chatLabel);
-			chatBox = new Input("");
-			chatBox.backgroundColor = 0;
-			chatBox.textColor = 0xffffffff;
-			chatBox.borderColor = 0xffffffff;
-			chatBox.x = chatLabel.right;
-			chatBox.y = FlxG.height - 25;
-			chatBox.height = 20;
-			chatBox.width = FlxG.width - 110 - 200;
-			addChild(chatBox);
-			chatLog = new Array();
-			chatLogText = new Label("");
-			chatLogText.backgroundColor = 0;
-			chatLogText.textColor = 0xffffffff;
-			chatLogText.borderColor = 0xffffffff;
-			chatLogText.x = chatLabel.x;
-			chatLogText.y = 5;
-			chatLogText.width = userList.x - chatLogText.x - 5;
-			chatLogText.height = userList.height;
-			addChild(chatLogText);
+			chat = new ChatPanel();
+			chat.getBtnLogOut().addActionListener(logout);
+			addChild(chat);
+			Mouse.show();
 		}
 		
 		override public function update():void
@@ -74,12 +44,12 @@ package states
 			if ( FlxG.keys.pressed("ENTER") )
 			{
 				// send chat message
-				if (chatBox.text != "")
+				if (chat.getChatBox().getText() != "")
 				{
-					GameInfo.connection.send("WizardText", chatBox.text);
-					chatBox.text = "";
-					chatBox.width = FlxG.width - 110 - 200;
+					GameInfo.connection.send("WizardText", chat.getChatBox().getText());
+					chat.getChatBox().setText("");
 				}
+				
 				//FlxG.fade.start(0xee000000, .5, onFade);
 			}
 			super.update();
@@ -87,22 +57,16 @@ package states
 		
 		private function buildWizardList():void
 		{
-			userList.text = "";
-			var i:int = 0;
+			
+			chat.getUserList().setText("");
+			//var i:int = 0;
 			for (var id:String in names)
 			{
-				i++;
-				if (i > namesCount) break;
-				userList.text = userList.text + names[id] + "\n";
+				//i++;
+				//if (i > namesCount) break;
+				chat.getUserList().appendText(names[id] + "\n");
 			}
-			//userList.text += "---\n";
-			userList.width = 125;
-			userList.height = FlxG.height - 30;
-		}
-		
-		private function onFade():void
-		{
-			FlxG.state = new PlayState();
+			
 		}
 		
 		private function registerSelf(connection:Connection):void
@@ -132,14 +96,7 @@ package states
 		private function wizardText(m:Message, id:int, message:String):void
 		{
 			//todo: add message to message log;
-			chatLog.push(names[id] + ": " + message);
-			if (chatLog.length > 29) chatLog.shift();
-			chatLogText.text = "";
-			for (var i:int = 0; i < chatLog.length; ++i )
-				chatLogText.text += chatLog[i] + "\n";
-			//chatLogText.text += "---\n";
-			chatLogText.width = FlxG.width - 335;
-			chatLogText.height = FlxG.height - 30;
+			chat.getChatLog().appendText(names[id] + ": " + message + "\n");
 		}
 		
 		private function wizardLeft(m:Message, id:int):void
@@ -167,12 +124,12 @@ package states
 		private function joinError(error:PlayerIOError):void
 		{
 			//todo: error stuffs
-			trace(error.name + error.message);
-			//GameInfo.connection.disconnect();
-			logout();
+			errorBox = new ErrorBox("Error: " + error.name, error.message);
+			errorBox.show();
+			logout(new Event(""));
 		}
 		
-		private function logout():void
+		private function logout(e:Event):void
 		{
 			FlxG.state = new AuthentiState();
 		}

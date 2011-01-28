@@ -13,7 +13,9 @@ package
 	{
 		public function Main():void
 		{
+			useDefaultHotKeys = false;
 			super( 640, 480, AuthentiState, 1 );
+			useDefaultHotKeys = false;
 		}
 	}
 	

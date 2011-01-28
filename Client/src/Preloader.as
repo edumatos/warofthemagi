@@ -1,6 +1,7 @@
 package 
 {
 	import org.flixel.FlxPreloader;
+	import Main;
 	
 	/**
 	 * ...

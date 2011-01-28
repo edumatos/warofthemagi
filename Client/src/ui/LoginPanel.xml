@@ -1,0 +1,337 @@
+<AsWingUI name="LoginPanel" packageName="ui">
+  <Com name="JPanel" id="LoginPanel">
+    <Properties>
+      <Property name="id" type="id">
+        <Value value="LoginPanel"/>
+      </Property>
+      <Property name="attr_scope" type="attr_scope">
+        <Value value="private"/>
+      </Property>
+      <Property name="getter_scope" type="getter_scope">
+        <Value value="none"/>
+      </Property>
+      <Property name="Location" type="Location">
+        <Value value="0,0"/>
+      </Property>
+      <Property name="Size" type="Size">
+        <Value value="640,480"/>
+      </Property>
+      <Property name="PreferredSize" type="PreferredSize">
+        <Value value="640,480"/>
+      </Property>
+      <Property name="Layout" type="Layout">
+        <Value>
+          <Layout name="CenterLayout">
+            <Properties/>
+          </Layout>
+        </Value>
+      </Property>
+    </Properties>
+    <Com name="JPanel" id="pnlGroup">
+      <Properties>
+        <Property name="id" type="id">
+          <Value value="pnlGroup"/>
+        </Property>
+        <Property name="attr_scope" type="attr_scope">
+          <Value value="private"/>
+        </Property>
+        <Property name="getter_scope" type="getter_scope">
+          <Value value="none"/>
+        </Property>
+        <Property name="Location" type="Location">
+          <Value value="220,195"/>
+        </Property>
+        <Property name="Size" type="Size">
+          <Value value="200,90"/>
+        </Property>
+        <Property name="PreferredSize" type="PreferredSize">
+          <Value value="200,90"/>
+        </Property>
+        <Property name="Layout" type="Layout">
+          <Value>
+            <Layout name="SoftBoxLayout">
+              <Properties>
+                <Property name="Axis" type="Axis">
+                  <Value value="1"/>
+                </Property>
+                <Property name="Align" type="Align">
+                  <Value value="4"/>
+                </Property>
+              </Properties>
+            </Layout>
+          </Value>
+        </Property>
+      </Properties>
+      <Com name="JPanel" id="pnlUsername">
+        <Properties>
+          <Property name="id" type="id">
+            <Value value="pnlUsername"/>
+          </Property>
+          <Property name="attr_scope" type="attr_scope">
+            <Value value="private"/>
+          </Property>
+          <Property name="getter_scope" type="getter_scope">
+            <Value value="none"/>
+          </Property>
+          <Property name="Location" type="Location">
+            <Value value="0,8"/>
+          </Property>
+          <Property name="Size" type="Size">
+            <Value value="200,30"/>
+          </Property>
+          <Property name="Layout" type="Layout">
+            <Value>
+              <Layout name="FlowLayout">
+                <Properties>
+                  <Property name="Alignment" type="Alignment">
+                    <Value value="4"/>
+                  </Property>
+                </Properties>
+              </Layout>
+            </Value>
+          </Property>
+        </Properties>
+        <Com name="JLabel" id="lblUsername">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="lblUsername"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="none"/>
+            </Property>
+            <Property name="Foreground" type="Foreground">
+              <Value value="ffffff,1"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="9,6"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="56,17"/>
+            </Property>
+            <Property name="Text" type="Text">
+              <Value value="Username:"/>
+            </Property>
+          </Properties>
+        </Com>
+        <Com name="JTextField" id="usernameField">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="usernameField"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="public"/>
+            </Property>
+            <Property name="Foreground" type="Foreground">
+              <Value value="ffffff,1"/>
+            </Property>
+            <Property name="Background" type="Background">
+              <Value value="333333,1"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="70,5"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="125,20"/>
+            </Property>
+            <Property name="PreferredSize" type="PreferredSize">
+              <Value value="125,20"/>
+            </Property>
+            <Property name="Editable" type="Editable">
+              <Value value="true"/>
+            </Property>
+            <Property name="DisplayAsPassword" type="DisplayAsPassword">
+              <Value value="false"/>
+            </Property>
+            <Property name="MaxChars" type="MaxChars">
+              <Value value="25"/>
+            </Property>
+            <Property name="WordWrap" type="WordWrap">
+              <Value value="false"/>
+            </Property>
+          </Properties>
+        </Com>
+      </Com>
+      <Com name="JPanel" id="pnlPassword">
+        <Properties>
+          <Property name="id" type="id">
+            <Value value="pnlPassword"/>
+          </Property>
+          <Property name="attr_scope" type="attr_scope">
+            <Value value="private"/>
+          </Property>
+          <Property name="getter_scope" type="getter_scope">
+            <Value value="none"/>
+          </Property>
+          <Property name="Location" type="Location">
+            <Value value="0,38"/>
+          </Property>
+          <Property name="Size" type="Size">
+            <Value value="200,30"/>
+          </Property>
+          <Property name="Layout" type="Layout">
+            <Value>
+              <Layout name="FlowLayout">
+                <Properties>
+                  <Property name="Alignment" type="Alignment">
+                    <Value value="4"/>
+                  </Property>
+                </Properties>
+              </Layout>
+            </Value>
+          </Property>
+        </Properties>
+        <Com name="JLabel" id="lblPassword">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="lblPassword"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="none"/>
+            </Property>
+            <Property name="Foreground" type="Foreground">
+              <Value value="ffffff,1"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="11,6"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="54,17"/>
+            </Property>
+            <Property name="Text" type="Text">
+              <Value value="Password:"/>
+            </Property>
+          </Properties>
+        </Com>
+        <Com name="JTextField" id="passwordField">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="passwordField"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="public"/>
+            </Property>
+            <Property name="Foreground" type="Foreground">
+              <Value value="ffffff,1"/>
+            </Property>
+            <Property name="Background" type="Background">
+              <Value value="333333,1"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="70,5"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="125,20"/>
+            </Property>
+            <Property name="PreferredSize" type="PreferredSize">
+              <Value value="125,20"/>
+            </Property>
+            <Property name="Editable" type="Editable">
+              <Value value="true"/>
+            </Property>
+            <Property name="DisplayAsPassword" type="DisplayAsPassword">
+              <Value value="true"/>
+            </Property>
+            <Property name="MaxChars" type="MaxChars">
+              <Value value="25"/>
+            </Property>
+            <Property name="WordWrap" type="WordWrap">
+              <Value value="false"/>
+            </Property>
+          </Properties>
+        </Com>
+      </Com>
+      <Com name="JPanel" id="pnlButtons">
+        <Properties>
+          <Property name="id" type="id">
+            <Value value="pnlButtons"/>
+          </Property>
+          <Property name="attr_scope" type="attr_scope">
+            <Value value="private"/>
+          </Property>
+          <Property name="getter_scope" type="getter_scope">
+            <Value value="none"/>
+          </Property>
+          <Property name="Location" type="Location">
+            <Value value="0,68"/>
+          </Property>
+          <Property name="Size" type="Size">
+            <Value value="200,22"/>
+          </Property>
+          <Property name="Layout" type="Layout">
+            <Value>
+              <Layout name="GridLayout">
+                <Properties>
+                  <Property name="Rows" type="Rows">
+                    <Value value="1"/>
+                  </Property>
+                  <Property name="Columns" type="Columns">
+                    <Value value="0"/>
+                  </Property>
+                  <Property name="Hgap" type="Hgap">
+                    <Value value="25"/>
+                  </Property>
+                </Properties>
+              </Layout>
+            </Value>
+          </Property>
+        </Properties>
+        <Com name="JButton" id="btnRegister">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="btnRegister"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="public"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="0,0"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="87,22"/>
+            </Property>
+            <Property name="Text" type="Text">
+              <Value value="Register"/>
+            </Property>
+          </Properties>
+        </Com>
+        <Com name="JButton" id="btnConnect">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="btnConnect"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="public"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="112,0"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="87,22"/>
+            </Property>
+            <Property name="Text" type="Text">
+              <Value value="Connect"/>
+            </Property>
+          </Properties>
+        </Com>
+      </Com>
+    </Com>
+  </Com>
+</AsWingUI>

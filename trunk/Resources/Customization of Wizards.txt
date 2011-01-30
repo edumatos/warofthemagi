@@ -1,0 +1,30 @@
+Magi Customization:
+~~~~~~~~~~~~~~~~~~
+
+Just like in MoM, there were traits for your
+wizard. Let's work it off of a 10pt. buy
+system.
+
+Economic: 2pts
+   ¤Reduces the cost of towers by 20%
+
+Charasmatic: 2pts
+   ¤Reduces the cost of heroes by 20%
+
+Sorcerer: 2pts
+   ¤Reduces the cost of researching by 20%
+
+Mana Keeper: 3pts
+   ¤Gain an extra 3 mana/sec
+
+War Magi: 6pts
+   ¤Reduce the cost of casting by 50%
+
+
+
+
+
+
+Also, they can purchase books. Each book will
+boost their magic (Durations/Dmg/heal) by
+10% per book.

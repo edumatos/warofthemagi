@@ -14,11 +14,14 @@ public class ChatPanel extends JPanel{
 	//members define
 	private var displayPanel:JPanel;
 	private var pnlGames:JPanel;
-	private var btnLogOut:JButton;
 	private var gameScroller:JScrollPane;
 	private var gameList:JList;
+	private var btnJoinGame:JButton;
+	private var btnCreateGame:JButton;
 	private var chatLogScroller:JScrollPane;
-	private var chatLog:JTextField;
+	private var chatLog:JTextArea;
+	private var rightSidePanel:JPanel;
+	private var btnLogOut:JButton;
 	private var userListScroller:JScrollPane;
 	private var userList:JTextField;
 	private var chatLabel:JLabel;
@@ -44,58 +47,77 @@ public class ChatPanel extends JPanel{
 		displayPanel.setLayout(layout0);
 		
 		pnlGames = new JPanel();
-		pnlGames.setLocation(new IntPoint(0, 2));
-		pnlGames.setSize(new IntDimension(150, 440));
+		pnlGames.setLocation(new IntPoint(0, 5));
+		pnlGames.setSize(new IntDimension(150, 435));
 		var layout1:SoftBoxLayout = new SoftBoxLayout();
 		layout1.setAxis(AsWingConstants.VERTICAL);
 		layout1.setAlign(AsWingConstants.LEFT);
 		layout1.setGap(3);
 		pnlGames.setLayout(layout1);
 		
-		btnLogOut = new JButton();
-		btnLogOut.setLocation(new IntPoint(0, 0));
-		btnLogOut.setSize(new IntDimension(150, 22));
-		btnLogOut.setText("Log Out");
-		
 		gameScroller = new JScrollPane();
-		gameScroller.setLocation(new IntPoint(0, 25));
-		gameScroller.setSize(new IntDimension(150, 415));
+		gameScroller.setLocation(new IntPoint(0, 0));
+		gameScroller.setSize(new IntDimension(150, 385));
 		
 		gameList = new JList();
+		gameList.setForeground(new ASColor(0xffffff, 1));
 		gameList.setBackground(new ASColor(0x333333, 1));
 		gameList.setLocation(new IntPoint(0, 0));
-		gameList.setSize(new IntDimension(150, 415));
-		gameList.setPreferredSize(new IntDimension(150, 415));
+		gameList.setSize(new IntDimension(150, 385));
+		gameList.setPreferredSize(new IntDimension(150, 385));
 		gameList.setSelectionMode(0);
 		gameList.setPreferredCellWidthWhenNoCount(150);
 		gameList.setVisibleCellWidth(150);
-		gameList.setVisibleRowCount(100);
+		gameList.setVisibleRowCount(50);
+		
+		btnJoinGame = new JButton();
+		btnJoinGame.setLocation(new IntPoint(0, 418));
+		btnJoinGame.setSize(new IntDimension(150, 22));
+		btnJoinGame.setText("Join Selected Game");
+		
+		btnCreateGame = new JButton();
+		btnCreateGame.setLocation(new IntPoint(0, 443));
+		btnCreateGame.setSize(new IntDimension(150, 22));
+		btnCreateGame.setText("Create Game");
 		
 		chatLogScroller = new JScrollPane();
 		chatLogScroller.setLocation(new IntPoint(155, 0));
 		chatLogScroller.setSize(new IntDimension(344, 445));
+		chatLogScroller.setPreferredSize(new IntDimension(344, 445));
 		
-		chatLog = new JTextField();
+		chatLog = new JTextArea();
 		chatLog.setForeground(new ASColor(0xffffff, 1));
 		chatLog.setBackground(new ASColor(0x333333, 1));
-		chatLog.setLocation(new IntPoint(0, 0));
 		chatLog.setSize(new IntDimension(344, 445));
-		chatLog.setPreferredSize(new IntDimension(344, 445));
-		chatLog.setColumns(42);
-		chatLog.setEditable(false);
 		chatLog.setWordWrap(true);
 		
+		rightSidePanel = new JPanel();
+		rightSidePanel.setLocation(new IntPoint(504, 1));
+		rightSidePanel.setSize(new IntDimension(125, 442));
+		var layout2:SoftBoxLayout = new SoftBoxLayout();
+		layout2.setAxis(AsWingConstants.VERTICAL);
+		layout2.setAlign(AsWingConstants.TOP);
+		layout2.setGap(0);
+		rightSidePanel.setLayout(layout2);
+		
+		btnLogOut = new JButton();
+		btnLogOut.setLocation(new IntPoint(0, 0));
+		btnLogOut.setSize(new IntDimension(126, 22));
+		btnLogOut.setText("Log Out");
+		
 		userListScroller = new JScrollPane();
-		userListScroller.setLocation(new IntPoint(504, 0));
-		userListScroller.setSize(new IntDimension(125, 445));
+		userListScroller.setLocation(new IntPoint(0, 25));
+		userListScroller.setSize(new IntDimension(126, 420));
+		userListScroller.setPreferredSize(new IntDimension(126, 420));
 		
 		userList = new JTextField();
 		userList.setForeground(new ASColor(0xffffff, 1));
 		userList.setBackground(new ASColor(0x333333, 1));
-		userList.setLocation(new IntPoint(504, 0));
-		userList.setSize(new IntDimension(125, 445));
-		userList.setPreferredSize(new IntDimension(125, 445));
+		userList.setLocation(new IntPoint(0, 0));
+		userList.setSize(new IntDimension(110, 420));
+		userList.setPreferredSize(new IntDimension(110, 420));
 		userList.setEditable(false);
+		userList.setWordWrap(false);
 		
 		chatLabel = new JLabel();
 		chatLabel.setForeground(new ASColor(0xffffff, 1));
@@ -117,16 +139,23 @@ public class ChatPanel extends JPanel{
 		
 		displayPanel.append(pnlGames);
 		displayPanel.append(chatLogScroller);
-		displayPanel.append(userListScroller);
+		displayPanel.append(rightSidePanel);
 		
-		pnlGames.append(btnLogOut);
 		pnlGames.append(gameScroller);
+		pnlGames.append(btnJoinGame);
+		pnlGames.append(btnCreateGame);
 		
-		gameScroller.append(gameList);
+		rightSidePanel.append(btnLogOut);
+		rightSidePanel.append(userListScroller);
 		
-		chatLogScroller.append(chatLog);
+		gameScroller.setView(gameList);
+		gameScroller.setVerticalScrollBarPolicy(JScrollPane.SCROLLBAR_AS_NEEDED);
 		
-		userListScroller.append(userList);
+		chatLogScroller.setView(chatLog);
+		chatLogScroller.setVerticalScrollBarPolicy(JScrollPane.SCROLLBAR_ALWAYS);
+		
+		userListScroller.setView(userList);
+		userListScroller.setVerticalScrollBarPolicy(JScrollPane.SCROLLBAR_AS_NEEDED);
 		
 	}
 	
@@ -134,18 +163,27 @@ public class ChatPanel extends JPanel{
 	
 	
 	
-	public function getBtnLogOut():JButton{
-		return btnLogOut;
-	}
-	
 	
 	public function getGameList():JList{
 		return gameList;
 	}
 	
+	public function getBtnJoinGame():JButton{
+		return btnJoinGame;
+	}
 	
-	public function getChatLog():JTextField{
+	public function getBtnCreateGame():JButton{
+		return btnCreateGame;
+	}
+	
+	
+	public function getChatLog():JTextArea{
 		return chatLog;
+	}
+	
+	
+	public function getBtnLogOut():JButton{
+		return btnLogOut;
 	}
 	
 	

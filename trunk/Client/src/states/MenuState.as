@@ -4,12 +4,13 @@ package states
 	import flash.ui.Mouse;
 	import flash.utils.Dictionary;
 	import game.GameObject;
+	import org.aswing.VectorListModel;
 	import org.flixel.*;
 	import playerio.*;
 	import states.PlayState;
 	import game.GameInfo;
 	import ui.ChatPanel;
-	import ui.ErrorBox;
+	import ui.ErrorPanel;
 
 	/**
 	 * ...
@@ -21,7 +22,8 @@ package states
 		private var namesCount:int;
 		private var names:Dictionary;
 		private var chat:ChatPanel;
-		private var errorBox:ErrorBox;
+		private var errorBox:ErrorPanel;
+		private var gameList:VectorListModel;
 		
 		public function MenuState():void
 		{
@@ -35,8 +37,13 @@ package states
 			namesCount = 0;
 			chat = new ChatPanel();
 			chat.getBtnLogOut().addActionListener(logout);
+			chat.getBtnJoinGame().addActionListener(joinGame);
+			chat.getBtnCreateGame().addActionListener(createGame);
 			addChild(chat);
 			Mouse.show();
+			GameInfo.client.multiplayer.listRooms("WotMMatch", null, 100, 0, updateGameList, otherError);
+			gameList = new VectorListModel();
+			gameList.addListDataListener(chat.getGameList());
 		}
 		
 		override public function update():void
@@ -66,7 +73,6 @@ package states
 				//if (i > namesCount) break;
 				chat.getUserList().appendText(names[id] + "\n");
 			}
-			
 		}
 		
 		private function registerSelf(connection:Connection):void
@@ -97,6 +103,7 @@ package states
 		{
 			//todo: add message to message log;
 			chat.getChatLog().appendText(names[id] + ": " + message + "\n");
+			chat.getChatLog().scrollToBottomLeft();
 		}
 		
 		private function wizardLeft(m:Message, id:int):void
@@ -124,14 +131,43 @@ package states
 		private function joinError(error:PlayerIOError):void
 		{
 			//todo: error stuffs
-			errorBox = new ErrorBox("Error: " + error.name, error.message);
-			errorBox.show();
+			errorBox = new ErrorPanel(this, error.name, error.message);
 			logout(new Event(""));
+		}
+		
+		private function otherError(error:PlayerIOError):void
+		{
+			errorBox = new ErrorPanel(this, error.name, error.message);
 		}
 		
 		private function logout(e:Event):void
 		{
 			FlxG.state = new AuthentiState();
+		}
+		
+		private function joinGame(e:Event):void
+		{
+			//TODO: join a game
+		}
+		
+		private function createGame(e:Event):void
+		{
+			//TODO: create a game
+			//GameInfo.client.multiplayer.createRoom
+		}
+		
+		private function updateGameList(rooms:Array):void
+		{
+			// TODO: update game list
+			gameList.clear();
+			for (var i:int = 0; i < rooms.length; ++i )
+			{
+				var ri:RoomInfo = rooms[i];
+				// skip full rooms
+				if (ri.onlineUsers >= ri.data["maxplayers"])
+					continue;
+				gameList.append(ri);
+			}
 		}
 		
 	}

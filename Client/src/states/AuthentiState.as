@@ -6,7 +6,7 @@ package states
 	import org.flixel.data.FlxPanel;
 	import playerio.*;
 	import states.MenuState;
-	import ui.ErrorBox;
+	import ui.ErrorPanel;
 	import ui.LoginPanel;
 	import game.GameInfo;
 	
@@ -18,7 +18,7 @@ package states
 	{
 		
 		private var loginPanel:LoginPanel;
-		private var errorBox:ErrorBox;
+		private var errorBox:ErrorPanel;
 		
 		[Embed(source = '../images/cursor2.png')] private var imgCursor:Class;
 		
@@ -84,8 +84,7 @@ package states
 		{
 			loginPanel.getUsernameField().setText("");
 			loginPanel.getPasswordField().setText("");
-			errorBox = new ErrorBox("Error: " + error.name, error.message);
-			errorBox.show();
+			errorBox = new ErrorPanel(this, error.name, error.message);
 		}
 		
 	}

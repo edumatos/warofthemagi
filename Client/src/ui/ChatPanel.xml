@@ -70,10 +70,10 @@
             <Value value="none"/>
           </Property>
           <Property name="Location" type="Location">
-            <Value value="0,2"/>
+            <Value value="0,5"/>
           </Property>
           <Property name="Size" type="Size">
-            <Value value="150,440"/>
+            <Value value="150,435"/>
           </Property>
           <Property name="Layout" type="Layout">
             <Value>
@@ -87,6 +87,192 @@
                   </Property>
                   <Property name="Gap" type="Gap">
                     <Value value="3"/>
+                  </Property>
+                </Properties>
+              </Layout>
+            </Value>
+          </Property>
+        </Properties>
+        <Com name="JScrollPane" id="gameScroller">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="gameScroller"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="none"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="0,0"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="150,385"/>
+            </Property>
+          </Properties>
+          <Com name="JList" id="gameList">
+            <Properties>
+              <Property name="id" type="id">
+                <Value value="gameList"/>
+              </Property>
+              <Property name="attr_scope" type="attr_scope">
+                <Value value="private"/>
+              </Property>
+              <Property name="getter_scope" type="getter_scope">
+                <Value value="public"/>
+              </Property>
+              <Property name="Foreground" type="Foreground">
+                <Value value="ffffff,1"/>
+              </Property>
+              <Property name="Background" type="Background">
+                <Value value="333333,1"/>
+              </Property>
+              <Property name="Location" type="Location">
+                <Value value="0,0"/>
+              </Property>
+              <Property name="Size" type="Size">
+                <Value value="150,385"/>
+              </Property>
+              <Property name="PreferredSize" type="PreferredSize">
+                <Value value="150,385"/>
+              </Property>
+              <Property name="SelectionMode" type="SelectionMode">
+                <Value value="0"/>
+              </Property>
+              <Property name="PreferredCellWidthWhenNoCount" type="PreferredCellWidthWhenNoCount">
+                <Value value="150"/>
+              </Property>
+              <Property name="VisibleCellWidth" type="VisibleCellWidth">
+                <Value value="150"/>
+              </Property>
+              <Property name="VisibleRowCount" type="VisibleRowCount">
+                <Value value="50"/>
+              </Property>
+            </Properties>
+          </Com>
+        </Com>
+        <Com name="JButton" id="btnJoinGame">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="btnJoinGame"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="public"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="0,418"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="150,22"/>
+            </Property>
+            <Property name="Text" type="Text">
+              <Value value="Join Selected Game"/>
+            </Property>
+          </Properties>
+        </Com>
+        <Com name="JButton" id="btnCreateGame">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="btnCreateGame"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="public"/>
+            </Property>
+            <Property name="Location" type="Location">
+              <Value value="0,443"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="150,22"/>
+            </Property>
+            <Property name="Text" type="Text">
+              <Value value="Create Game"/>
+            </Property>
+          </Properties>
+        </Com>
+      </Com>
+      <Com name="JScrollPane" id="chatLogScroller">
+        <Properties>
+          <Property name="id" type="id">
+            <Value value="chatLogScroller"/>
+          </Property>
+          <Property name="attr_scope" type="attr_scope">
+            <Value value="private"/>
+          </Property>
+          <Property name="getter_scope" type="getter_scope">
+            <Value value="none"/>
+          </Property>
+          <Property name="Location" type="Location">
+            <Value value="155,0"/>
+          </Property>
+          <Property name="Size" type="Size">
+            <Value value="344,445"/>
+          </Property>
+          <Property name="PreferredSize" type="PreferredSize">
+            <Value value="344,445"/>
+          </Property>
+        </Properties>
+        <Com name="JTextArea" id="chatLog">
+          <Properties>
+            <Property name="id" type="id">
+              <Value value="chatLog"/>
+            </Property>
+            <Property name="attr_scope" type="attr_scope">
+              <Value value="private"/>
+            </Property>
+            <Property name="getter_scope" type="getter_scope">
+              <Value value="public"/>
+            </Property>
+            <Property name="Foreground" type="Foreground">
+              <Value value="ffffff,1"/>
+            </Property>
+            <Property name="Background" type="Background">
+              <Value value="333333,1"/>
+            </Property>
+            <Property name="Size" type="Size">
+              <Value value="344,445"/>
+            </Property>
+            <Property name="WordWrap" type="WordWrap">
+              <Value value="true"/>
+            </Property>
+          </Properties>
+        </Com>
+      </Com>
+      <Com name="JPanel" id="rightSidePanel">
+        <Properties>
+          <Property name="id" type="id">
+            <Value value="rightSidePanel"/>
+          </Property>
+          <Property name="attr_scope" type="attr_scope">
+            <Value value="private"/>
+          </Property>
+          <Property name="getter_scope" type="getter_scope">
+            <Value value="none"/>
+          </Property>
+          <Property name="Location" type="Location">
+            <Value value="504,1"/>
+          </Property>
+          <Property name="Size" type="Size">
+            <Value value="125,442"/>
+          </Property>
+          <Property name="Layout" type="Layout">
+            <Value>
+              <Layout name="SoftBoxLayout">
+                <Properties>
+                  <Property name="Axis" type="Axis">
+                    <Value value="1"/>
+                  </Property>
+                  <Property name="Align" type="Align">
+                    <Value value="1"/>
+                  </Property>
+                  <Property name="Gap" type="Gap">
+                    <Value value="0"/>
                   </Property>
                 </Properties>
               </Layout>
@@ -108,17 +294,17 @@
               <Value value="0,0"/>
             </Property>
             <Property name="Size" type="Size">
-              <Value value="150,22"/>
+              <Value value="126,22"/>
             </Property>
             <Property name="Text" type="Text">
               <Value value="Log Out"/>
             </Property>
           </Properties>
         </Com>
-        <Com name="JScrollPane" id="gameScroller">
+        <Com name="JScrollPane" id="userListScroller">
           <Properties>
             <Property name="id" type="id">
-              <Value value="gameScroller"/>
+              <Value value="userListScroller"/>
             </Property>
             <Property name="attr_scope" type="attr_scope">
               <Value value="private"/>
@@ -130,19 +316,25 @@
               <Value value="0,25"/>
             </Property>
             <Property name="Size" type="Size">
-              <Value value="150,415"/>
+              <Value value="126,420"/>
+            </Property>
+            <Property name="PreferredSize" type="PreferredSize">
+              <Value value="126,420"/>
             </Property>
           </Properties>
-          <Com name="JList" id="gameList">
+          <Com name="JTextField" id="userList">
             <Properties>
               <Property name="id" type="id">
-                <Value value="gameList"/>
+                <Value value="userList"/>
               </Property>
               <Property name="attr_scope" type="attr_scope">
                 <Value value="private"/>
               </Property>
               <Property name="getter_scope" type="getter_scope">
                 <Value value="public"/>
+              </Property>
+              <Property name="Foreground" type="Foreground">
+                <Value value="ffffff,1"/>
               </Property>
               <Property name="Background" type="Background">
                 <Value value="333333,1"/>
@@ -151,131 +343,19 @@
                 <Value value="0,0"/>
               </Property>
               <Property name="Size" type="Size">
-                <Value value="150,415"/>
+                <Value value="110,420"/>
               </Property>
               <Property name="PreferredSize" type="PreferredSize">
-                <Value value="150,415"/>
+                <Value value="110,420"/>
               </Property>
-              <Property name="SelectionMode" type="SelectionMode">
-                <Value value="0"/>
+              <Property name="Editable" type="Editable">
+                <Value value="false"/>
               </Property>
-              <Property name="PreferredCellWidthWhenNoCount" type="PreferredCellWidthWhenNoCount">
-                <Value value="150"/>
-              </Property>
-              <Property name="VisibleCellWidth" type="VisibleCellWidth">
-                <Value value="150"/>
-              </Property>
-              <Property name="VisibleRowCount" type="VisibleRowCount">
-                <Value value="100"/>
+              <Property name="WordWrap" type="WordWrap">
+                <Value value="false"/>
               </Property>
             </Properties>
           </Com>
-        </Com>
-      </Com>
-      <Com name="JScrollPane" id="chatLogScroller">
-        <Properties>
-          <Property name="id" type="id">
-            <Value value="chatLogScroller"/>
-          </Property>
-          <Property name="attr_scope" type="attr_scope">
-            <Value value="private"/>
-          </Property>
-          <Property name="getter_scope" type="getter_scope">
-            <Value value="none"/>
-          </Property>
-          <Property name="Location" type="Location">
-            <Value value="155,0"/>
-          </Property>
-          <Property name="Size" type="Size">
-            <Value value="344,445"/>
-          </Property>
-        </Properties>
-        <Com name="JTextField" id="chatLog">
-          <Properties>
-            <Property name="id" type="id">
-              <Value value="chatLog"/>
-            </Property>
-            <Property name="attr_scope" type="attr_scope">
-              <Value value="private"/>
-            </Property>
-            <Property name="getter_scope" type="getter_scope">
-              <Value value="public"/>
-            </Property>
-            <Property name="Foreground" type="Foreground">
-              <Value value="ffffff,1"/>
-            </Property>
-            <Property name="Background" type="Background">
-              <Value value="333333,1"/>
-            </Property>
-            <Property name="Location" type="Location">
-              <Value value="0,0"/>
-            </Property>
-            <Property name="Size" type="Size">
-              <Value value="344,445"/>
-            </Property>
-            <Property name="PreferredSize" type="PreferredSize">
-              <Value value="344,445"/>
-            </Property>
-            <Property name="Columns" type="Columns">
-              <Value value="42"/>
-            </Property>
-            <Property name="Editable" type="Editable">
-              <Value value="false"/>
-            </Property>
-            <Property name="WordWrap" type="WordWrap">
-              <Value value="true"/>
-            </Property>
-          </Properties>
-        </Com>
-      </Com>
-      <Com name="JScrollPane" id="userListScroller">
-        <Properties>
-          <Property name="id" type="id">
-            <Value value="userListScroller"/>
-          </Property>
-          <Property name="attr_scope" type="attr_scope">
-            <Value value="private"/>
-          </Property>
-          <Property name="getter_scope" type="getter_scope">
-            <Value value="none"/>
-          </Property>
-          <Property name="Location" type="Location">
-            <Value value="504,0"/>
-          </Property>
-          <Property name="Size" type="Size">
-            <Value value="125,445"/>
-          </Property>
-        </Properties>
-        <Com name="JTextField" id="userList">
-          <Properties>
-            <Property name="id" type="id">
-              <Value value="userList"/>
-            </Property>
-            <Property name="attr_scope" type="attr_scope">
-              <Value value="private"/>
-            </Property>
-            <Property name="getter_scope" type="getter_scope">
-              <Value value="public"/>
-            </Property>
-            <Property name="Foreground" type="Foreground">
-              <Value value="ffffff,1"/>
-            </Property>
-            <Property name="Background" type="Background">
-              <Value value="333333,1"/>
-            </Property>
-            <Property name="Location" type="Location">
-              <Value value="504,0"/>
-            </Property>
-            <Property name="Size" type="Size">
-              <Value value="125,445"/>
-            </Property>
-            <Property name="PreferredSize" type="PreferredSize">
-              <Value value="125,445"/>
-            </Property>
-            <Property name="Editable" type="Editable">
-              <Value value="false"/>
-            </Property>
-          </Properties>
         </Com>
       </Com>
     </Com>

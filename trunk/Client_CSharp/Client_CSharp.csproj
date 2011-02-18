@@ -47,11 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameDisplay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GameDisplay.Designer.cs">
+      <DependentUpon>GameDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameListItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GameListItem.Designer.cs">
       <DependentUpon>GameListItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameUI.Designer.cs">
+      <DependentUpon>GameUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Lobby.cs">
       <SubType>UserControl</SubType>
@@ -76,8 +88,14 @@
     <EmbeddedResource Include="AuthenticateUser.resx">
       <DependentUpon>AuthenticateUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GameDisplay.resx">
+      <DependentUpon>GameDisplay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameListItem.resx">
       <DependentUpon>GameListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameUI.resx">
+      <DependentUpon>GameUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Lobby.resx">
       <DependentUpon>Lobby.cs</DependentUpon>

@@ -29,9 +29,12 @@ namespace Client_CSharp
 
         static void Update()
         {
+            if (!MainForm.ShowGame) return;
+
             long lastTimestamp = Timestamp;
             Timestamp = Stopwatch.GetTimestamp();
             float deltaTime = Convert.ToSingle(Timestamp - lastTimestamp) / Stopwatch.Frequency;
+            if (deltaTime > .1f) deltaTime = .1f;
 
             //TODO: update and render game.
         }

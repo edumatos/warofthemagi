@@ -28,24 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lobby1 = new Client_CSharp.Lobby();
+            this.AuthenticateUser = new Client_CSharp.AuthenticateUser();
+            this.Lobby = new Client_CSharp.Lobby();
+            this.GameUI = new Client_CSharp.GameUI();
             this.SuspendLayout();
             // 
-            // lobby1
+            // AuthenticateUser
             // 
-            this.lobby1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lobby1.Location = new System.Drawing.Point(0, 0);
-            this.lobby1.MinimumSize = new System.Drawing.Size(800, 600);
-            this.lobby1.Name = "lobby1";
-            this.lobby1.Size = new System.Drawing.Size(800, 600);
-            this.lobby1.TabIndex = 0;
+            this.AuthenticateUser.BackColor = System.Drawing.Color.Black;
+            this.AuthenticateUser.Location = new System.Drawing.Point(-455, 429);
+            this.AuthenticateUser.MinimumSize = new System.Drawing.Size(800, 600);
+            this.AuthenticateUser.Name = "AuthenticateUser";
+            this.AuthenticateUser.Size = new System.Drawing.Size(800, 600);
+            this.AuthenticateUser.TabIndex = 1;
+            // 
+            // Lobby
+            // 
+            this.Lobby.Location = new System.Drawing.Point(521, 429);
+            this.Lobby.MinimumSize = new System.Drawing.Size(800, 600);
+            this.Lobby.Name = "Lobby";
+            this.Lobby.Size = new System.Drawing.Size(800, 600);
+            this.Lobby.TabIndex = 0;
+            this.Lobby.Visible = false;
+            // 
+            // GameUI
+            // 
+            this.GameUI.Location = new System.Drawing.Point(-455, -229);
+            this.GameUI.MinimumSize = new System.Drawing.Size(800, 600);
+            this.GameUI.Name = "GameUI";
+            this.GameUI.Size = new System.Drawing.Size(800, 600);
+            this.GameUI.TabIndex = 2;
+            this.GameUI.Visible = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.lobby1);
+            this.Controls.Add(this.GameUI);
+            this.Controls.Add(this.AuthenticateUser);
+            this.Controls.Add(this.Lobby);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainForm";
             this.Text = "War of the Magi";
@@ -55,7 +77,9 @@
 
         #endregion
 
-        private Lobby lobby1;
+        public GameUI GameUI;
+        public Lobby Lobby;
+        public AuthenticateUser AuthenticateUser;
     }
 }
 
